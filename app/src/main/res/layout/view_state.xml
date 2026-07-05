@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/space_xl">
+
+    <ImageView
+        android:id="@+id/ivState"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:alpha="0.9"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_cloud_off"
+        app:tint="@color/text_secondary" />
+
+    <TextView
+        android:id="@+id/tvStateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_lg"
+        android:text="@string/error_generic"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/text_title"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvStateMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_sm"
+        android:gravity="center"
+        android:text="@string/error_load_failed"
+        android:textColor="@color/text_secondary"
+        android:textSize="@dimen/text_body" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnStateAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_xl"
+        android:paddingHorizontal="@dimen/space_xl"
+        android:text="@string/action_retry"
+        app:backgroundTint="@color/brand_primary"
+        app:cornerRadius="@dimen/radius_lg" />
+</LinearLayout>

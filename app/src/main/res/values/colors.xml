@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Brand palette -->
+    <color name="brand_primary">#FF7C4DFF</color>
+    <color name="brand_primary_variant">#FF651FFF</color>
+    <color name="brand_secondary">#FF00E5FF</color>
+    <color name="brand_on_primary">#FFFFFFFF</color>
+
+    <!-- Dark surfaces -->
+    <color name="bg_root">#FF0E0E12</color>
+    <color name="bg_surface">#FF17171E</color>
+    <color name="bg_surface_variant">#FF20202B</color>
+    <color name="bg_elevated">#FF23232F</color>
+
+    <!-- Text -->
+    <color name="text_primary">#FFF5F5F7</color>
+    <color name="text_secondary">#FFB4B4C4</color>
+    <color name="text_hint">#FF6E6E80</color>
+
+    <!-- Utility -->
+    <color name="divider">#22FFFFFF</color>
+    <color name="scrim">#99000000</color>
+    <color name="scrim_strong">#CC000000</color>
+    <color name="shimmer_base">#FF1C1C26</color>
+    <color name="favorite_active">#FFFF4D6D</color>
+    <color name="pro_badge">#FFFFC107</color>
+    <color name="pro_badge_text">#FF1A1A1A</color>
+
+    <!-- Splash gradient -->
+    <color name="splash_gradient_start">#FF120B2E</color>
+    <color name="splash_gradient_center">#FF3B1F7A</color>
+    <color name="splash_gradient_end">#FF7C4DFF</color>
+
+    <!-- Category tint fallbacks used behind loading images -->
+    <color name="placeholder_bg">#FF1C1C26</color>
+</resources>

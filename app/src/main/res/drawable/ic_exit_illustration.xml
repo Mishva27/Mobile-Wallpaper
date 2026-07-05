@@ -1,0 +1,61 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Soft outer glow ring -->
+    <path
+        android:fillAlpha="0.16"
+        android:pathData="M60,60 m-58,0 a58,58 0 1,0 116,0 a58,58 0 1,0 -116,0 z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="2" android:startY="2"
+                android:endX="118" android:endY="118"
+                android:type="linear">
+                <item android:offset="0" android:color="@color/brand_primary" />
+                <item android:offset="1" android:color="@color/brand_secondary" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Gradient night disc -->
+    <path
+        android:pathData="M60,60 m-44,0 a44,44 0 1,0 88,0 a44,44 0 1,0 -88,0 z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="16" android:startY="16"
+                android:endX="104" android:endY="104"
+                android:type="linear">
+                <item android:offset="0" android:color="@color/splash_gradient_center" />
+                <item android:offset="1" android:color="@color/brand_primary" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Crescent moon -->
+    <group
+        android:scaleX="2.3"
+        android:scaleY="2.3"
+        android:translateX="32.4"
+        android:translateY="32.4">
+        <path
+            android:fillColor="#FFFFF3C4"
+            android:pathData="M12,3c-4.97,0 -9,4.03 -9,9s4.03,9 9,9 9,-4.03 9,-9c0,-0.46 -0.04,-0.92 -0.1,-1.36 -0.98,1.37 -2.58,2.26 -4.4,2.26 -2.98,0 -5.4,-2.42 -5.4,-5.4 0,-1.81 0.89,-3.42 2.26,-4.4C12.92,3.04 12.46,3 12,3L12,3z" />
+    </group>
+
+    <!-- Sparkles -->
+    <group android:translateX="86" android:translateY="36" android:scaleX="1.5" android:scaleY="1.5">
+        <path android:fillColor="#FFFFFFFF"
+            android:pathData="M0,-4 C0.6,-1.6 1.6,-0.6 4,0 C1.6,0.6 0.6,1.6 0,4 C-0.6,1.6 -1.6,0.6 -4,0 C-1.6,-0.6 -0.6,-1.6 0,-4 Z" />
+    </group>
+    <group android:translateX="34" android:translateY="80" android:scaleX="1.05" android:scaleY="1.05">
+        <path android:fillColor="#FFFFFFFF"
+            android:pathData="M0,-4 C0.6,-1.6 1.6,-0.6 4,0 C1.6,0.6 0.6,1.6 0,4 C-0.6,1.6 -1.6,0.6 -4,0 C-1.6,-0.6 -0.6,-1.6 0,-4 Z" />
+    </group>
+    <group android:translateX="90" android:translateY="82" android:scaleX="0.8" android:scaleY="0.8">
+        <path android:fillColor="#FFFFF3C4"
+            android:pathData="M0,-4 C0.6,-1.6 1.6,-0.6 4,0 C1.6,0.6 0.6,1.6 0,4 C-0.6,1.6 -1.6,0.6 -4,0 C-1.6,-0.6 -0.6,-1.6 0,-4 Z" />
+    </group>
+</vector>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Default Remote Config values used until the first successful fetch. -->
+<defaultsMap>
+    <entry>
+        <key>db_root_path</key>
+        <value>categories</value>
+    </entry>
+    <entry>
+        <key>grid_span_count</key>
+        <value>2</value>
+    </entry>
+    <entry>
+        <key>show_pro_badge</key>
+        <value>true</value>
+    </entry>
+    <entry>
+        <key>splash_min_duration_ms</key>
+        <value>1200</value>
+    </entry>
+</defaultsMap>

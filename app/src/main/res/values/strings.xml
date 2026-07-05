@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">Mobile Wallpaper</string>
+    <string name="app_tagline">Wallpapers that speak to you</string>
+
+    <!-- Content descriptions -->
+    <string name="cd_app_logo">Application logo</string>
+    <string name="cd_category_image">Category preview image</string>
+    <string name="cd_wallpaper_image">Wallpaper image</string>
+    <string name="cd_back">Navigate back</string>
+    <string name="cd_favorites">Open favorites</string>
+    <string name="cd_share">Share wallpaper</string>
+    <string name="cd_favorite">Add or remove favorite</string>
+    <string name="cd_set_wallpaper">Set wallpaper</string>
+
+    <!-- Screen titles -->
+    <string name="title_home">Explore</string>
+    <string name="title_favorites">Favorites</string>
+
+    <!-- Home -->
+    <string name="label_categories">Categories</string>
+    <string name="pro_badge">PRO</string>
+
+    <!-- Detail actions -->
+    <string name="action_share">Share</string>
+    <string name="action_download">Download</string>
+    <string name="action_favorite">Favorite</string>
+    <string name="action_set_wallpaper">Set Wallpaper</string>
+    <string name="action_set_short">Set</string>
+    <string name="cd_download">Download wallpaper</string>
+
+    <!-- Download feedback -->
+    <string name="progress_downloading">Downloading…</string>
+    <string name="msg_downloaded">Saved to your gallery</string>
+    <string name="error_download_failed">Could not download the wallpaper.</string>
+    <string name="error_permission_needed">Storage permission is required to download.</string>
+
+    <!-- Set wallpaper chooser -->
+    <string name="set_target_title">Set wallpaper on</string>
+    <string name="set_target_home">Home screen</string>
+    <string name="set_target_lock">Lock screen</string>
+    <string name="set_target_both">Home &amp; Lock screen</string>
+
+    <!-- Progress / status -->
+    <string name="progress_loading">Loading…</string>
+    <string name="progress_please_wait">Please wait…</string>
+    <string name="progress_applying_wallpaper">Applying wallpaper…</string>
+    <string name="progress_preparing_share">Preparing to share…</string>
+
+    <!-- Success / feedback -->
+    <string name="msg_wallpaper_set">Wallpaper applied successfully</string>
+    <string name="msg_added_favorite">Added to favorites</string>
+    <string name="msg_removed_favorite">Removed from favorites</string>
+    <string name="msg_share_via">Share wallpaper via</string>
+
+    <!-- Errors -->
+    <string name="error_generic">Something went wrong. Please try again.</string>
+    <string name="error_load_failed">Unable to load wallpapers right now.</string>
+    <string name="error_wallpaper_set">Could not set wallpaper. Please try again.</string>
+    <string name="error_share_failed">Could not prepare the image for sharing.</string>
+    <string name="error_no_categories">No wallpapers available yet. Check back soon.</string>
+
+    <!-- No internet dialog -->
+    <string name="no_internet_title">No internet connection</string>
+    <string name="no_internet_message">Please check your connection and try again.</string>
+    <string name="action_retry">Retry</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_ok">OK</string>
+
+    <!-- Exit dialog -->
+    <string name="exit_title">Leaving so soon?</string>
+    <string name="exit_message">You can always come back for fresh wallpapers. Are you sure you want to exit?</string>
+    <string name="action_stay">Stay</string>
+    <string name="action_exit">Exit</string>
+    <string name="cd_exit_illustration">Exit illustration</string>
+
+    <!-- Empty states -->
+    <string name="empty_favorites_title">No favorites yet</string>
+    <string name="empty_favorites_message">Tap the heart on any wallpaper to save it here.</string>
+
+    <!-- Analytics event / param names -->
+    <string name="analytics_screen_home" translatable="false">home</string>
+
+    <plurals name="wallpaper_count">
+        <item quantity="one">%d wallpaper</item>
+        <item quantity="other">%d wallpapers</item>
+    </plurals>
+</resources>

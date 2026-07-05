@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "590216894309",
+    "project_id": "mobile-wallpaper-90b69",
+    "storage_bucket": "mobile-wallpaper-90b69.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590216894309:android:38ba7f0f0f2919b5bdb38c",
+        "android_client_info": {
+          "package_name": "com.example.mobilewallpaper"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpL3z04uBVW3uFshy-VCNnY_ES6qBU4ok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
