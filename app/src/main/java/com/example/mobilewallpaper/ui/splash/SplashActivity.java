@@ -12,9 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.splashscreen.SplashScreen;
 
+import com.example.mobilewallpaper.data.local.PrefManager;
 import com.example.mobilewallpaper.databinding.ActivitySplashBinding;
 import com.example.mobilewallpaper.ui.base.BaseActivity;
 import com.example.mobilewallpaper.ui.home.HomeActivity;
+import com.example.mobilewallpaper.ui.onboarding.OnboardingActivity;
 import com.example.mobilewallpaper.util.Constants;
 import com.example.mobilewallpaper.util.DialogUtils;
 import com.example.mobilewallpaper.util.NetworkUtils;
@@ -97,7 +99,10 @@ public class SplashActivity extends BaseActivity {
     private void goHome() {
         if (navigated || isFinishing()) return;
         navigated = true;
-        startActivity(new Intent(this, HomeActivity.class));
+        // First launch shows onboarding; afterwards go straight to Home.
+        Class<?> destination = new PrefManager(this).isOnboarded()
+                ? HomeActivity.class : OnboardingActivity.class;
+        startActivity(new Intent(this, destination));
         finish();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }

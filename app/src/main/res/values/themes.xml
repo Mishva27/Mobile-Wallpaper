@@ -48,6 +48,12 @@
         <item name="cornerSize">@dimen/radius_xl</item>
     </style>
 
+    <!-- Onboarding image corners (slightly less than the border radius). -->
+    <style name="OnboardImageShape" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">18dp</item>
+    </style>
+
     <!-- Toolbar title styling -->
     <style name="ToolbarTitle" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textColor">@color/text_primary</item>

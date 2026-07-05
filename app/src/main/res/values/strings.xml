@@ -66,6 +66,18 @@
     <string name="action_cancel">Cancel</string>
     <string name="action_ok">OK</string>
 
+    <!-- Onboarding -->
+    <string name="onboard_title_1">Set in a Tap</string>
+    <string name="onboard_subtitle_1">Apply any wallpaper to your home screen, lock screen, or both — instantly.</string>
+    <string name="onboard_title_2">Save to Gallery</string>
+    <string name="onboard_subtitle_2">Download the wallpapers you love and keep them right on your device.</string>
+    <string name="onboard_title_3">Share the Vibe</string>
+    <string name="onboard_subtitle_3">Send wallpapers to your friends and family in just a few seconds.</string>
+    <string name="action_next">Next</string>
+    <string name="action_get_started">Get Started</string>
+    <string name="cd_next">Next</string>
+    <string name="cd_onboarding_image">Onboarding illustration</string>
+
     <!-- Exit dialog -->
     <string name="exit_title">Leaving so soon?</string>
     <string name="exit_message">You can always come back for fresh wallpapers. Are you sure you want to exit?</string>
