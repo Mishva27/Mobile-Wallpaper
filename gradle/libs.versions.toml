@@ -20,6 +20,9 @@ swiperefresh = "1.1.0"
 coreSplashscreen = "1.0.1"
 # Image loading
 glide = "4.16.0"
+# Scalable size units (responsive dp/sp across screen sizes)
+sdp = "1.1.1"
+ssp = "1.1.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -47,6 +50,9 @@ core-splashscreen = { group = "androidx.core", name = "core-splashscreen", versi
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 glide-okhttp = { group = "com.github.bumptech.glide", name = "okhttp3-integration", version.ref = "glide" }
 glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+# Scalable size units
+sdp-android = { group = "com.intuit.sdp", name = "sdp-android", version.ref = "sdp" }
+ssp-android = { group = "com.intuit.ssp", name = "ssp-android", version.ref = "ssp" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

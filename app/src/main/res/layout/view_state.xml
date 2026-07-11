@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/ivState"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="@dimen/_72sdp"
+        android:layout_height="@dimen/_72sdp"
         android:alpha="0.9"
         android:contentDescription="@null"
         android:src="@drawable/ic_cloud_off"

@@ -23,7 +23,7 @@
         android:layout_marginTop="@dimen/space_lg"
         android:layout_marginBottom="@dimen/space_md"
         android:background="@drawable/bg_gradient_border"
-        android:padding="2dp"
+        android:padding="@dimen/_2sdp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/gImageBottom"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_primary"
-            android:textSize="24sp"
+            android:textSize="@dimen/_24ssp"
             android:textStyle="bold"
             tools:text="Set in a Tap" />
 

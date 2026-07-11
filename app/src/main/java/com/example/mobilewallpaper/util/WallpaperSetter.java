@@ -3,6 +3,8 @@ package com.example.mobilewallpaper.util;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
+import android.util.DisplayMetrics;
 
 import androidx.annotation.NonNull;
 
@@ -32,6 +34,22 @@ public final class WallpaperSetter {
         }
     }
 
+    /**
+     * How the wallpaper should behave on the home screen.
+     *
+     * <p>STATIC pins the wallpaper to the exact screen size so the launcher has no
+     * off-screen area to pan — it stays fixed while swiping between home pages.
+     * MOVING keeps a wider canvas so the launcher can scroll/parallax the wallpaper
+     * as pages change (the platform default).</p>
+     */
+    public enum Mode {
+        STATIC,
+        MOVING
+    }
+
+    /** Horizontal canvas multiplier that gives a moving wallpaper room to scroll. */
+    private static final int MOVING_WIDTH_FACTOR = 2;
+
     public interface Callback {
         void onSuccess(@NonNull Target target);
 
@@ -42,7 +60,8 @@ public final class WallpaperSetter {
     }
 
     public static void apply(@NonNull Context context, @NonNull String url,
-                             @NonNull Target target, @NonNull Callback callback) {
+                             @NonNull Target target, @NonNull Mode mode,
+                             @NonNull Callback callback) {
         Context appContext = context.getApplicationContext();
         AppExecutors.get().background().execute(() -> {
             try {
@@ -53,9 +72,32 @@ public final class WallpaperSetter {
                         .get();
 
                 WallpaperManager manager = WallpaperManager.getInstance(appContext);
+
+                DisplayMetrics dm = appContext.getResources().getDisplayMetrics();
+                int screenW = dm.widthPixels;
+                int screenH = dm.heightPixels;
+
+                Bitmap toApply;
+                Rect cropHint;
+                if (mode == Mode.STATIC) {
+                    // Pin the wallpaper to the screen so there is nothing to scroll.
+                    toApply = cropToCover(bitmap, screenW, screenH);
+                    cropHint = new Rect(0, 0, toApply.getWidth(), toApply.getHeight());
+                    manager.suggestDesiredDimensions(screenW, screenH);
+                } else {
+                    // Give the launcher a wider canvas so it can pan the wallpaper.
+                    toApply = bitmap;
+                    cropHint = null;
+                    manager.suggestDesiredDimensions(screenW * MOVING_WIDTH_FACTOR, screenH);
+                }
+
                 // Apply each surface in its own call so lock + home both take effect.
                 for (int flag : target.flags) {
-                    manager.setBitmap(bitmap, null, true, flag);
+                    manager.setBitmap(toApply, cropHint, true, flag);
+                }
+
+                if (toApply != bitmap && !toApply.isRecycled()) {
+                    toApply.recycle();
                 }
 
                 AppExecutors.get().mainThread().execute(() -> callback.onSuccess(target));
@@ -63,5 +105,29 @@ public final class WallpaperSetter {
                 AppExecutors.get().mainThread().execute(callback::onError);
             }
         });
+    }
+
+    /**
+     * Scales {@code src} to cover a {@code targetW} x {@code targetH} area and
+     * centre-crops it to exactly those dimensions. Returns {@code src} unchanged if
+     * it already matches, so callers must not recycle the result blindly.
+     */
+    private static Bitmap cropToCover(@NonNull Bitmap src, int targetW, int targetH) {
+        if (targetW <= 0 || targetH <= 0) return src;
+        if (src.getWidth() == targetW && src.getHeight() == targetH) return src;
+
+        float scale = Math.max((float) targetW / src.getWidth(),
+                (float) targetH / src.getHeight());
+        int scaledW = Math.max(targetW, Math.round(src.getWidth() * scale));
+        int scaledH = Math.max(targetH, Math.round(src.getHeight() * scale));
+
+        Bitmap scaled = Bitmap.createScaledBitmap(src, scaledW, scaledH, true);
+        int x = (scaledW - targetW) / 2;
+        int y = (scaledH - targetH) / 2;
+        Bitmap out = Bitmap.createBitmap(scaled, x, y, targetW, targetH);
+        if (scaled != out && scaled != src) {
+            scaled.recycle();
+        }
+        return out;
     }
 }

@@ -9,12 +9,113 @@
     android:paddingBottom="@dimen/space_xl">
 
     <View
-        android:layout_width="40dp"
-        android:layout_height="4dp"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_4sdp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/space_md"
         android:layout_marginBottom="@dimen/space_lg"
         android:background="@drawable/bg_sheet_handle" />
+
+    <!-- Wallpaper style: static (fixed) vs moving (scrolls with home pages) -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_sm"
+        android:layout_marginBottom="@dimen/space_sm"
+        android:text="@string/style_section_label"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/text_title"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_lg"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/optionStatic"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/space_sm"
+            android:layout_weight="1"
+            android:background="@drawable/bg_style_option"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/space_sm"
+            android:paddingVertical="@dimen/space_md">
+
+            <ImageView
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:contentDescription="@null"
+                android:duplicateParentState="true"
+                android:src="@drawable/ic_static"
+                android:tint="@color/style_option_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_sm"
+                android:duplicateParentState="true"
+                android:text="@string/style_static"
+                android:textColor="@color/style_option_title"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:text="@string/style_static_desc"
+                android:textColor="@color/text_hint"
+                android:textSize="@dimen/_12ssp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/optionMoving"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/space_sm"
+            android:layout_weight="1"
+            android:background="@drawable/bg_style_option"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/space_sm"
+            android:paddingVertical="@dimen/space_md">
+
+            <ImageView
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:contentDescription="@null"
+                android:duplicateParentState="true"
+                android:src="@drawable/ic_moving"
+                android:tint="@color/style_option_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_sm"
+                android:duplicateParentState="true"
+                android:text="@string/style_moving"
+                android:textColor="@color/style_option_title"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:text="@string/style_moving_desc"
+                android:textColor="@color/text_hint"
+                android:textSize="@dimen/_12ssp" />
+        </LinearLayout>
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"

@@ -21,8 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:indicatorColor="@color/brand_primary"
-            app:indicatorSize="32dp"
-            app:trackThickness="3dp"
+            app:indicatorSize="@dimen/_32sdp"
+            app:trackThickness="@dimen/_3sdp"
             android:indeterminate="true" />
 
         <TextView
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_lg"
-            android:maxWidth="220dp"
+            android:maxWidth="@dimen/_220sdp"
             android:text="@string/progress_please_wait"
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_body" />

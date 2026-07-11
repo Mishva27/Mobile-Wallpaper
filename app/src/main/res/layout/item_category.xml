@@ -7,7 +7,7 @@
     android:layout_margin="@dimen/grid_gap"
     app:cardBackgroundColor="@color/bg_surface"
     app:cardCornerRadius="@dimen/radius_md"
-    app:cardElevation="2dp"
+    app:cardElevation="@dimen/_2sdp"
     app:cardPreventCornerOverlap="true"
     app:rippleColor="@color/brand_primary">
 
@@ -20,7 +20,7 @@
         <ImageView
             android:id="@+id/ivCategory"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="@dimen/category_card_height"
             android:background="@color/placeholder_bg"
             android:contentDescription="@string/cd_category_image"
             android:scaleType="centerCrop" />
@@ -38,8 +38,8 @@
                 android:layout_height="wrap_content"
                 android:indeterminate="true"
                 app:indicatorColor="@color/brand_primary"
-                app:indicatorSize="26dp"
-                app:trackThickness="2dp" />
+                app:indicatorSize="@dimen/_26sdp"
+                app:trackThickness="@dimen/_2sdp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="@dimen/_80sdp"
             android:layout_gravity="bottom"
             android:background="@drawable/bg_scrim_bottom" />
 

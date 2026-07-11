@@ -1,28 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Central design tokens.
+
+    Spacing / radius / size tokens map to the sdp library (scalable dp) and the
+    text tokens to the ssp library (scalable sp). This makes every dimension that
+    flows through these tokens scale proportionally across phones, large phones
+    and tablets, so the UI keeps the same visual balance on all screen sizes.
+
+    Layouts and styles reference these semantic tokens (@dimen/space_lg,
+    @dimen/text_body, …) rather than raw sdp/ssp values, so sizing stays
+    consistent and tweakable from one place.
+-->
 <resources>
-    <dimen name="space_xs">4dp</dimen>
-    <dimen name="space_sm">8dp</dimen>
-    <dimen name="space_md">12dp</dimen>
-    <dimen name="space_lg">16dp</dimen>
-    <dimen name="space_xl">24dp</dimen>
-    <dimen name="space_xxl">32dp</dimen>
+    <!-- Spacing scale -->
+    <dimen name="space_xs">@dimen/_4sdp</dimen>
+    <dimen name="space_sm">@dimen/_8sdp</dimen>
+    <dimen name="space_md">@dimen/_12sdp</dimen>
+    <dimen name="space_lg">@dimen/_16sdp</dimen>
+    <dimen name="space_xl">@dimen/_24sdp</dimen>
+    <dimen name="space_xxl">@dimen/_32sdp</dimen>
 
-    <dimen name="radius_sm">8dp</dimen>
-    <dimen name="radius_md">14dp</dimen>
-    <dimen name="radius_lg">20dp</dimen>
-    <dimen name="radius_xl">28dp</dimen>
+    <!-- Corner radii -->
+    <dimen name="radius_sm">@dimen/_8sdp</dimen>
+    <dimen name="radius_md">@dimen/_14sdp</dimen>
+    <dimen name="radius_lg">@dimen/_20sdp</dimen>
+    <dimen name="radius_xl">@dimen/_28sdp</dimen>
 
-    <dimen name="grid_gap">6dp</dimen>
-    <dimen name="category_card_height">190dp</dimen>
-    <dimen name="toolbar_height">56dp</dimen>
-    <dimen name="fab_size">56dp</dimen>
-    <dimen name="detail_action_size">52dp</dimen>
-    <dimen name="splash_logo_size">128dp</dimen>
+    <!-- Component sizes -->
+    <dimen name="grid_gap">@dimen/_6sdp</dimen>
+    <dimen name="category_card_height">@dimen/_190sdp</dimen>
+    <dimen name="toolbar_height">@dimen/_56sdp</dimen>
+    <dimen name="fab_size">@dimen/_56sdp</dimen>
+    <dimen name="detail_action_size">@dimen/_42sdp</dimen>
+    <dimen name="splash_logo_size">@dimen/_128sdp</dimen>
 
-    <dimen name="text_title">20sp</dimen>
-    <dimen name="text_body">15sp</dimen>
-    <dimen name="text_caption">13sp</dimen>
-    <dimen name="text_badge">11sp</dimen>
+    <!-- Type scale -->
+    <dimen name="text_title">@dimen/_20ssp</dimen>
+    <dimen name="text_body">@dimen/_15ssp</dimen>
+    <dimen name="text_caption">@dimen/_13ssp</dimen>
+    <dimen name="text_badge">@dimen/_11ssp</dimen>
 
+    <!-- Elevation is a z-depth, not a layout size, so it stays in raw dp. -->
     <dimen name="elevation_card">4dp</dimen>
 </resources>

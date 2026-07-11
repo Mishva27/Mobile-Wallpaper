@@ -58,8 +58,8 @@ public class OnboardingActivity extends BaseActivity {
 
     private void buildDots(int count) {
         dots = new View[count];
-        int size = dp(8);
-        int margin = dp(4);
+        int size = sdp(com.intuit.sdp.R.dimen._8sdp);
+        int margin = sdp(com.intuit.sdp.R.dimen._4sdp);
         for (int i = 0; i < count; i++) {
             View dot = new View(this);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(size, size);
@@ -79,7 +79,9 @@ public class OnboardingActivity extends BaseActivity {
 
         for (int i = 0; i < dots.length; i++) {
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) dots[i].getLayoutParams();
-            lp.width = i == position ? dp(22) : dp(8);
+            lp.width = i == position
+                    ? sdp(com.intuit.sdp.R.dimen._22sdp)
+                    : sdp(com.intuit.sdp.R.dimen._8sdp);
             dots[i].setLayoutParams(lp);
             dots[i].setBackgroundResource(
                     i == position ? R.drawable.dot_selected : R.drawable.dot_default);
@@ -92,7 +94,8 @@ public class OnboardingActivity extends BaseActivity {
         finish();
     }
 
-    private int dp(int value) {
-        return Math.round(getResources().getDisplayMetrics().density * value);
+    /** Resolves a scalable-dp (sdp) dimension resource to pixels. */
+    private int sdp(int dimenRes) {
+        return getResources().getDimensionPixelSize(dimenRes);
     }
 }

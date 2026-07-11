@@ -11,6 +11,11 @@
     <string name="cd_share">Share wallpaper</string>
     <string name="cd_favorite">Add or remove favorite</string>
     <string name="cd_set_wallpaper">Set wallpaper</string>
+    <string name="cd_preview">Preview wallpaper</string>
+    <string name="cd_close">Close preview</string>
+
+    <!-- Wallpaper preview -->
+    <string name="preview_swipe_hint">Swipe up to unlock</string>
 
     <!-- Screen titles -->
     <string name="title_home">Explore</string>
@@ -36,6 +41,13 @@
 
     <!-- Set wallpaper chooser -->
     <string name="set_target_title">Set wallpaper on</string>
+
+    <!-- Wallpaper style (static vs scrolling) -->
+    <string name="style_section_label">Wallpaper style</string>
+    <string name="style_static">Static</string>
+    <string name="style_static_desc">Stays fixed</string>
+    <string name="style_moving">Moving</string>
+    <string name="style_moving_desc">Scrolls with pages</string>
     <string name="set_target_home">Home screen</string>
     <string name="set_target_lock">Lock screen</string>
     <string name="set_target_both">Home &amp; Lock screen</string>

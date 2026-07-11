@@ -63,6 +63,10 @@ dependencies {
     implementation libs.swiperefreshlayout
     implementation libs.core.splashscreen
 
+    // Scalable size units (sdp/ssp) — responsive dimensions across all screen sizes
+    implementation libs.sdp.android
+    implementation libs.ssp.android
+
     // Firebase
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.analytics

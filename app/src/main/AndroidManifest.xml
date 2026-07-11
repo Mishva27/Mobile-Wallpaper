@@ -5,9 +5,19 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
+
+    <!-- Needed on Android 11+ to resolve launcher apps for the home-screen
+         preview dock (package-visibility filtering). -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
 
     <application
         android:name=".MobileWallpaperApp"
@@ -45,6 +55,10 @@
 
         <activity
             android:name=".ui.detail.WallpaperDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.detail.WallpaperPreviewActivity"
             android:exported="false" />
 
         <activity

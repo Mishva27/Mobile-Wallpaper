@@ -76,6 +76,7 @@ public class WallpaperDetailActivity extends BaseActivity {
         loadingDialog = new LoadingDialog(this);
 
         applyTopInsetMargin(binding.btnBack);
+        applyTopInsetMargin(binding.btnPreview);
         applyBottomInsetMargin(binding.actionBar);
 
         loadImage();
@@ -110,10 +111,17 @@ public class WallpaperDetailActivity extends BaseActivity {
 
     private void setupActions() {
         binding.btnBack.setOnClickListener(v -> finish());
+        binding.btnPreview.setOnClickListener(v -> onPreview());
         binding.actionShare.setOnClickListener(v -> onShare());
         binding.actionDownload.setOnClickListener(v -> onDownload());
         binding.actionFavorite.setOnClickListener(v -> onToggleFavorite());
         binding.actionSet.setOnClickListener(v -> onSetWallpaper());
+    }
+
+    private void onPreview() {
+        Intent intent = new Intent(this, WallpaperPreviewActivity.class);
+        intent.putExtra(Constants.EXTRA_WALLPAPER, wallpaper);
+        startActivity(intent);
     }
 
     private void onDownload() {
@@ -200,28 +208,46 @@ public class WallpaperDetailActivity extends BaseActivity {
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         dialog.setContentView(sheetBinding.getRoot());
 
+        // Wallpaper style selector — default to a static (non-scrolling) wallpaper.
+        sheetBinding.optionStatic.setSelected(true);
+        sheetBinding.optionMoving.setSelected(false);
+        sheetBinding.optionStatic.setOnClickListener(v -> {
+            sheetBinding.optionStatic.setSelected(true);
+            sheetBinding.optionMoving.setSelected(false);
+        });
+        sheetBinding.optionMoving.setOnClickListener(v -> {
+            sheetBinding.optionMoving.setSelected(true);
+            sheetBinding.optionStatic.setSelected(false);
+        });
+
         sheetBinding.rowHome.setOnClickListener(v -> {
             dialog.dismiss();
-            applyWallpaper(WallpaperSetter.Target.HOME);
+            applyWallpaper(WallpaperSetter.Target.HOME, selectedMode(sheetBinding));
         });
         sheetBinding.rowLock.setOnClickListener(v -> {
             dialog.dismiss();
-            applyWallpaper(WallpaperSetter.Target.LOCK);
+            applyWallpaper(WallpaperSetter.Target.LOCK, selectedMode(sheetBinding));
         });
         sheetBinding.rowBoth.setOnClickListener(v -> {
             dialog.dismiss();
-            applyWallpaper(WallpaperSetter.Target.BOTH);
+            applyWallpaper(WallpaperSetter.Target.BOTH, selectedMode(sheetBinding));
         });
         dialog.show();
     }
 
-    private void applyWallpaper(WallpaperSetter.Target target) {
+    private WallpaperSetter.Mode selectedMode(SheetSetWallpaperBinding sheetBinding) {
+        return sheetBinding.optionMoving.isSelected()
+                ? WallpaperSetter.Mode.MOVING
+                : WallpaperSetter.Mode.STATIC;
+    }
+
+    private void applyWallpaper(WallpaperSetter.Target target, WallpaperSetter.Mode mode) {
         if (!NetworkUtils.isConnected(this)) {
             toast(R.string.no_internet_message);
             return;
         }
         loadingDialog.show(R.string.progress_applying_wallpaper);
-        WallpaperSetter.apply(this, wallpaper.getImageUrl(), target, new WallpaperSetter.Callback() {
+        WallpaperSetter.apply(this, wallpaper.getImageUrl(), target, mode, new WallpaperSetter.Callback() {
             @Override
             public void onSuccess(@NonNull WallpaperSetter.Target target) {
                 loadingDialog.dismiss();

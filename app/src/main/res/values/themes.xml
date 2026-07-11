@@ -51,7 +51,7 @@
     <!-- Onboarding image corners (slightly less than the border radius). -->
     <style name="OnboardImageShape" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">18dp</item>
+        <item name="cornerSize">@dimen/_18sdp</item>
     </style>
 
     <!-- Toolbar title styling -->
@@ -92,8 +92,8 @@
     </style>
 
     <style name="SheetRowIcon">
-        <item name="android:layout_width">46dp</item>
-        <item name="android:layout_height">46dp</item>
+        <item name="android:layout_width">@dimen/_42sdp</item>
+        <item name="android:layout_height">@dimen/_42sdp</item>
         <item name="android:background">@drawable/bg_icon_tile_brand</item>
         <item name="android:padding">@dimen/space_sm</item>
         <item name="android:contentDescription">@null</item>

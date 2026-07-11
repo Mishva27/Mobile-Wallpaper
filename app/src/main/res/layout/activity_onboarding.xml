@@ -26,7 +26,7 @@
     <View
         android:id="@+id/adPlaceholder"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/_40sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -52,16 +52,16 @@
 
         <FrameLayout
             android:id="@+id/btnNext"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
             android:layout_gravity="end|center_vertical"
             android:background="@drawable/bg_action_circle_brand"
             android:clickable="true"
             android:focusable="true">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/cd_next"
                 android:src="@drawable/ic_arrow_forward"
@@ -71,7 +71,7 @@
         <LinearLayout
             android:id="@+id/btnGetStarted"
             android:layout_width="wrap_content"
-            android:layout_height="54dp"
+            android:layout_height="@dimen/_50sdp"
             android:layout_gravity="end|center_vertical"
             android:background="@drawable/bg_button_primary"
             android:clickable="true"

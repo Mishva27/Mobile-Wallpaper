@@ -19,8 +19,8 @@
 
     <ImageButton
         android:id="@+id/btnBack"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_margin="@dimen/space_lg"
         android:background="@drawable/bg_circle_scrim"
         android:contentDescription="@string/cd_back"
@@ -28,6 +28,18 @@
         app:tint="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnPreview"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_margin="@dimen/space_lg"
+        android:background="@drawable/bg_circle_scrim"
+        android:contentDescription="@string/cd_preview"
+        android:src="@drawable/ic_preview"
+        app:tint="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/imageProgress"
@@ -44,34 +56,37 @@
         android:id="@+id/actionBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/space_lg"
-        android:layout_marginBottom="@dimen/space_xl"
+        android:layout_marginHorizontal="@dimen/space_md"
+        android:layout_marginBottom="@dimen/space_lg"
         app:cardBackgroundColor="@color/bg_elevated"
         app:cardCornerRadius="@dimen/radius_xl"
-        app:cardElevation="10dp"
+        app:cardElevation="@dimen/_8sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- Compact single-row bar: subtle utility icons + a brand-coloured
+             primary "Set wallpaper" pill that takes the remaining width. -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:baselineAligned="false"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="@dimen/space_md">
+            android:paddingHorizontal="@dimen/space_sm"
+            android:paddingVertical="@dimen/space_sm">
 
             <FrameLayout
                 android:id="@+id/actionShare"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/_32sdp"
+                android:layout_height="@dimen/_32sdp"
                 android:background="@drawable/bg_action_circle"
                 android:clickable="true"
                 android:focusable="true">
 
                 <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
                     android:layout_gravity="center"
                     android:contentDescription="@string/cd_share"
                     android:src="@drawable/ic_share"
@@ -80,16 +95,16 @@
 
             <FrameLayout
                 android:id="@+id/actionDownload"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="@dimen/space_md"
+                android:layout_width="@dimen/_32sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginStart="@dimen/space_sm"
                 android:background="@drawable/bg_action_circle"
                 android:clickable="true"
                 android:focusable="true">
 
                 <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
                     android:layout_gravity="center"
                     android:contentDescription="@string/cd_download"
                     android:src="@drawable/ic_download"
@@ -98,38 +113,40 @@
 
             <FrameLayout
                 android:id="@+id/actionFavorite"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="@dimen/space_md"
+                android:layout_width="@dimen/_32sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginStart="@dimen/space_sm"
                 android:background="@drawable/bg_action_circle"
                 android:clickable="true"
                 android:focusable="true">
 
                 <ImageView
                     android:id="@+id/ivFavorite"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
                     android:layout_gravity="center"
                     android:contentDescription="@string/cd_favorite"
                     android:src="@drawable/ic_favorite_border"
                     app:tint="@color/text_primary" />
             </FrameLayout>
 
+            <!-- Primary action pill; weighted so it fills the remaining width. -->
             <LinearLayout
                 android:id="@+id/actionSet"
                 android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_marginStart="@dimen/space_md"
+                android:layout_height="@dimen/detail_action_size"
+                android:layout_marginStart="@dimen/space_sm"
                 android:layout_weight="1"
                 android:background="@drawable/bg_button_primary"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/space_sm">
 
                 <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
                     android:contentDescription="@string/cd_set_wallpaper"
                     android:src="@drawable/ic_image"
                     app:tint="@color/white" />
@@ -137,10 +154,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/space_sm"
+                    android:layout_marginStart="@dimen/space_xs"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:text="@string/action_set_wallpaper"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_body"
+                    android:textSize="@dimen/_13ssp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>

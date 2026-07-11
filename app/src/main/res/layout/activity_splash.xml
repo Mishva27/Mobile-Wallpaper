@@ -9,10 +9,10 @@
     <!-- Soft radial glow behind the icon -->
     <View
         android:id="@+id/splashGlow"
-        android:layout_width="320dp"
-        android:layout_height="320dp"
+        android:layout_width="@dimen/_320sdp"
+        android:layout_height="@dimen/_320sdp"
         android:layout_gravity="center"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="@dimen/_72sdp"
         android:background="@drawable/bg_splash_glow" />
 
     <LinearLayout
@@ -25,14 +25,14 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivSplashLogo"
-            android:layout_width="118dp"
-            android:layout_height="118dp"
+            android:layout_width="@dimen/_118sdp"
+            android:layout_height="@dimen/_118sdp"
             android:contentDescription="@string/cd_app_logo"
             android:scaleType="centerCrop"
             android:src="@drawable/app_icon"
             app:shapeAppearanceOverlay="@style/RoundedIconShape"
             app:strokeColor="#33FFFFFF"
-            app:strokeWidth="1dp" />
+            app:strokeWidth="@dimen/_1sdp" />
 
         <TextView
             android:id="@+id/tvAppName"
@@ -42,13 +42,13 @@
             android:letterSpacing="0.03"
             android:text="@string/app_name"
             android:textColor="@color/white"
-            android:textSize="28sp"
+            android:textSize="@dimen/_28ssp"
             android:textStyle="bold" />
 
         <!-- Gradient accent underline -->
         <View
-            android:layout_width="46dp"
-            android:layout_height="4dp"
+            android:layout_width="@dimen/_46sdp"
+            android:layout_height="@dimen/_4sdp"
             android:layout_marginTop="@dimen/space_md"
             android:background="@drawable/bg_primary_pill" />
 
@@ -66,14 +66,14 @@
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/splashProgress"
-        android:layout_width="120dp"
+        android:layout_width="@dimen/_120sdp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="@dimen/_56sdp"
         android:indeterminate="true"
         app:indicatorColor="@color/white"
         app:trackColor="#33FFFFFF"
-        app:trackCornerRadius="4dp"
-        app:trackThickness="4dp" />
+        app:trackCornerRadius="@dimen/_4sdp"
+        app:trackThickness="@dimen/_4sdp" />
 
 </FrameLayout>
