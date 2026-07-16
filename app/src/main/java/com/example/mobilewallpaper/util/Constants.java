@@ -12,6 +12,8 @@ public final class Constants {
     public static final String PREFS_NAME = "mobile_wallpaper_prefs";
     public static final String KEY_LAST_CATEGORY = "last_selected_category";
     public static final String KEY_ONBOARDED = "has_onboarded";
+    public static final String KEY_LIVE_VIDEO_PATH = "live_video_path";
+    public static final String KEY_LIVE_VERSION = "live_version";
 
     // Remote Config keys (defaults in res/xml/remote_config_defaults.xml)
     public static final String RC_DB_ROOT_PATH = "db_root_path";

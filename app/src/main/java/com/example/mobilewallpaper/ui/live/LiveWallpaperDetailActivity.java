@@ -1,6 +1,10 @@
 package com.example.mobilewallpaper.ui.live;
 
 import android.Manifest;
+import android.app.WallpaperInfo;
+import android.app.WallpaperManager;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Matrix;
@@ -8,6 +12,7 @@ import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.TextureView;
@@ -22,7 +27,10 @@ import com.example.mobilewallpaper.R;
 import com.example.mobilewallpaper.data.model.LiveWallpaper;
 import com.example.mobilewallpaper.databinding.ActivityLiveWallpaperDetailBinding;
 import com.example.mobilewallpaper.databinding.SheetSetWallpaperBinding;
+import com.example.mobilewallpaper.live.LiveWallpaperStore;
+import com.example.mobilewallpaper.live.VideoLiveWallpaperService;
 import com.example.mobilewallpaper.ui.base.BaseActivity;
+import com.example.mobilewallpaper.util.AppExecutors;
 import com.example.mobilewallpaper.util.AssetVideoPlayer;
 import com.example.mobilewallpaper.util.Constants;
 import com.example.mobilewallpaper.util.LiveVideoLoader;
@@ -42,6 +50,12 @@ import java.io.File;
 public class LiveWallpaperDetailActivity extends BaseActivity
         implements TextureView.SurfaceTextureListener {
 
+    /**
+     * Horizontal canvas multiplier for a moving wallpaper. Mirrors the value in
+     * WallpaperSetter so live and still wallpapers pan by the same amount.
+     */
+    private static final int MOVING_WIDTH_FACTOR = 2;
+
     private ActivityLiveWallpaperDetailBinding binding;
     private LiveWallpaper liveWallpaper;
     private LoadingDialog loadingDialog;
@@ -60,6 +74,16 @@ public class LiveWallpaperDetailActivity extends BaseActivity
                     toast(R.string.error_permission_needed);
                 }
             });
+
+    // Several ROMs return RESULT_CANCELED even after the wallpaper was applied, so
+    // confirm with WallpaperManager rather than trusting the result code.
+    private final ActivityResultLauncher<Intent> livePickerLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                    result -> {
+                        if (isOurLiveWallpaperActive()) {
+                            toast(R.string.msg_wallpaper_set);
+                        }
+                    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -241,21 +265,68 @@ public class LiveWallpaperDetailActivity extends BaseActivity
         }
     }
 
+    /**
+     * Hands the clip to {@link VideoLiveWallpaperService} and opens the system
+     * live-wallpaper picker to confirm. Applying the video as a still frame here
+     * would defeat the point — the whole screen is about an animated wallpaper.
+     *
+     * <p>{@code target} cannot be honoured: Android applies a live wallpaper
+     * system-wide and its picker exposes no home/lock choice.</p>
+     */
     private void applyFromVideoFile(@NonNull File file, WallpaperSetter.Target target,
                                     WallpaperSetter.Mode mode) {
-        WallpaperSetter.applyFromFile(this, file, target, mode, new WallpaperSetter.Callback() {
-            @Override
-            public void onSuccess(@NonNull WallpaperSetter.Target target) {
-                loadingDialog.dismiss();
-                toast(R.string.msg_wallpaper_set);
-            }
+        // Same rule as WallpaperSetter: a screen-sized canvas leaves the launcher
+        // nothing to pan, a wider one lets it scroll the wallpaper between pages.
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        WallpaperManager manager = WallpaperManager.getInstance(this);
+        if (mode == WallpaperSetter.Mode.STATIC) {
+            manager.suggestDesiredDimensions(dm.widthPixels, dm.heightPixels);
+        } else {
+            manager.suggestDesiredDimensions(dm.widthPixels * MOVING_WIDTH_FACTOR, dm.heightPixels);
+        }
 
-            @Override
-            public void onError() {
-                loadingDialog.dismiss();
-                toast(R.string.error_wallpaper_set);
+        AppExecutors.get().background().execute(() -> {
+            try {
+                LiveWallpaperStore.install(this, file);
+                AppExecutors.get().mainThread().execute(this::openLivePicker);
+            } catch (Exception e) {
+                AppExecutors.get().mainThread().execute(() -> {
+                    loadingDialog.dismiss();
+                    toast(R.string.error_wallpaper_set);
+                });
             }
         });
+    }
+
+    private void openLivePicker() {
+        loadingDialog.dismiss();
+        if (isOurLiveWallpaperActive()) {
+            // Already our engine — it reloads the new clip on its own, so sending the
+            // user through the picker again would just be a pointless detour.
+            toast(R.string.msg_wallpaper_set);
+            return;
+        }
+        Intent intent = new Intent(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER)
+                .putExtra(WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
+                        new ComponentName(this, VideoLiveWallpaperService.class));
+        try {
+            livePickerLauncher.launch(intent);
+        } catch (ActivityNotFoundException e) {
+            // A few ROMs ship no per-component chooser; fall back to the full list.
+            try {
+                livePickerLauncher.launch(
+                        new Intent(WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER));
+            } catch (ActivityNotFoundException e2) {
+                toast(R.string.error_wallpaper_set);
+            }
+        }
+    }
+
+    private boolean isOurLiveWallpaperActive() {
+        WallpaperInfo info = WallpaperManager.getInstance(this).getWallpaperInfo();
+        return info != null
+                && getPackageName().equals(info.getPackageName())
+                && VideoLiveWallpaperService.class.getName().equals(info.getServiceName());
     }
 
     // ---- TextureView.SurfaceTextureListener ----
