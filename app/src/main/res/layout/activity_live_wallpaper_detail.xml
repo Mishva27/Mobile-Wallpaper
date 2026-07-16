@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/liveDetailRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <TextureView
+        android:id="@+id/textureView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/videoProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:indicatorColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_margin="@dimen/space_lg"
+        android:background="@drawable/bg_circle_scrim"
+        android:contentDescription="@string/cd_back"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="@color/white" />
+
+    <ImageButton
+        android:id="@+id/btnPreview"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_margin="@dimen/space_lg"
+        android:background="@drawable/bg_circle_scrim"
+        android:contentDescription="@string/cd_preview"
+        android:src="@drawable/ic_preview"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/white" />
+
+    <!-- LIVE badge, top-centre -->
+    <LinearLayout
+        android:id="@+id/liveBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_xl"
+        android:background="@drawable/bg_live_badge"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/space_sm"
+        android:paddingVertical="@dimen/_3sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_play_circle"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:letterSpacing="0.05"
+            android:text="@string/live_badge"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_badge"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Set live wallpaper -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/actionBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_md"
+        android:layout_marginBottom="@dimen/space_lg"
+        app:cardBackgroundColor="@color/bg_elevated"
+        app:cardCornerRadius="@dimen/radius_xl"
+        app:cardElevation="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/space_sm"
+            android:paddingVertical="@dimen/space_sm">
+
+            <FrameLayout
+                android:id="@+id/actionShare"
+                android:layout_width="@dimen/_34sdp"
+                android:layout_height="@dimen/_34sdp"
+                android:background="@drawable/bg_action_circle"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/cd_share"
+                    android:src="@drawable/ic_share"
+                    app:tint="@color/text_primary" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/actionDownload"
+                android:layout_width="@dimen/_34sdp"
+                android:layout_height="@dimen/_34sdp"
+                android:layout_marginStart="@dimen/space_sm"
+                android:background="@drawable/bg_action_circle"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/cd_download"
+                    android:src="@drawable/ic_download"
+                    app:tint="@color/text_primary" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/btnSetLive"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/detail_action_size"
+                android:layout_marginStart="@dimen/space_md"
+                android:layout_weight="1"
+                android:background="@drawable/bg_button_primary"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/space_sm">
+
+                <ImageView
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_live"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_xs"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@string/action_set_live_wallpaper"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

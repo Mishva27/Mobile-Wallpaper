@@ -48,6 +48,18 @@
     <string name="style_static_desc">Stays fixed</string>
     <string name="style_moving">Moving</string>
     <string name="style_moving_desc">Scrolls with pages</string>
+
+    <!-- Live wallpapers -->
+    <string name="title_live_wallpapers">Live Wallpapers</string>
+    <string name="cd_live_wallpapers">Live wallpapers</string>
+    <string name="cd_live_preview">Live wallpaper preview</string>
+    <string name="live_badge">LIVE</string>
+    <string name="action_set_live_wallpaper">Set Live Wallpaper</string>
+    <string name="live_wallpaper_label">Mobile Wallpaper — Live</string>
+    <string name="live_wallpaper_desc">Animated live wallpaper</string>
+    <string name="empty_live_title">No live wallpapers</string>
+    <string name="empty_live_message">Check back soon for animated wallpapers.</string>
+    <string name="error_live_wallpaper">Couldn\'t open live wallpaper settings.</string>
     <string name="set_target_home">Home screen</string>
     <string name="set_target_lock">Lock screen</string>
     <string name="set_target_both">Home &amp; Lock screen</string>

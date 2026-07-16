@@ -4,11 +4,14 @@ import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.media.MediaMetadataRetriever;
 import android.util.DisplayMetrics;
 
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+
+import java.io.File;
 
 /**
  * Downloads a wallpaper bitmap off the main thread and applies it to the chosen
@@ -105,6 +108,72 @@ public final class WallpaperSetter {
                 AppExecutors.get().mainThread().execute(callback::onError);
             }
         });
+    }
+
+    /**
+     * Applies a wallpaper taken from a local video file (a representative frame)
+     * to the chosen surface, using the same crop / static-vs-moving logic as
+     * {@link #apply}. Runs off the main thread.
+     */
+    public static void applyFromFile(@NonNull Context context, @NonNull File videoFile,
+                                     @NonNull Target target, @NonNull Mode mode,
+                                     @NonNull Callback callback) {
+        Context appContext = context.getApplicationContext();
+        AppExecutors.get().background().execute(() -> {
+            try {
+                Bitmap bitmap = extractFrame(videoFile);
+                if (bitmap == null) {
+                    throw new IllegalStateException("Unable to read a frame from " + videoFile);
+                }
+
+                WallpaperManager manager = WallpaperManager.getInstance(appContext);
+
+                DisplayMetrics dm = appContext.getResources().getDisplayMetrics();
+                int screenW = dm.widthPixels;
+                int screenH = dm.heightPixels;
+
+                Bitmap toApply;
+                Rect cropHint;
+                if (mode == Mode.STATIC) {
+                    toApply = cropToCover(bitmap, screenW, screenH);
+                    cropHint = new Rect(0, 0, toApply.getWidth(), toApply.getHeight());
+                    manager.suggestDesiredDimensions(screenW, screenH);
+                } else {
+                    toApply = bitmap;
+                    cropHint = null;
+                    manager.suggestDesiredDimensions(screenW * MOVING_WIDTH_FACTOR, screenH);
+                }
+
+                for (int flag : target.flags) {
+                    manager.setBitmap(toApply, cropHint, true, flag);
+                }
+
+                if (toApply != bitmap && !toApply.isRecycled()) {
+                    toApply.recycle();
+                }
+
+                AppExecutors.get().mainThread().execute(() -> callback.onSuccess(target));
+            } catch (Exception e) {
+                AppExecutors.get().mainThread().execute(callback::onError);
+            }
+        });
+    }
+
+    /** Reads a representative frame from a local video file, or null on failure. */
+    private static Bitmap extractFrame(@NonNull File videoFile) {
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        try {
+            retriever.setDataSource(videoFile.getAbsolutePath());
+            return retriever.getFrameAtTime(0, MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+        } catch (Exception e) {
+            return null;
+        } finally {
+            try {
+                retriever.release();
+            } catch (Exception ignored) {
+                // nothing to do
+            }
+        }
     }
 
     /**

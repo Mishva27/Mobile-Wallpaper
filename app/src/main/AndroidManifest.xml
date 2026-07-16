@@ -65,6 +65,31 @@
             android:name=".ui.favorite.FavoriteActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".ui.live.LiveWallpaperListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.live.LiveWallpaperDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.live.LiveWallpaperPreviewActivity"
+            android:exported="false" />
+
+        <service
+            android:name=".live.VideoLiveWallpaperService"
+            android:exported="true"
+            android:label="@string/live_wallpaper_label"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/live_wallpaper" />
+        </service>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

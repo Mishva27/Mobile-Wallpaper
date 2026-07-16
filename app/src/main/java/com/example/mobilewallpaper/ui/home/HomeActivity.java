@@ -17,6 +17,7 @@ import com.example.mobilewallpaper.ui.base.BaseActivity;
 import com.example.mobilewallpaper.ui.common.GridSpacingItemDecoration;
 import com.example.mobilewallpaper.ui.favorite.FavoriteActivity;
 import com.example.mobilewallpaper.ui.list.WallpaperListActivity;
+import com.example.mobilewallpaper.ui.live.LiveWallpaperListActivity;
 import com.example.mobilewallpaper.util.AnalyticsHelper;
 import com.example.mobilewallpaper.util.Constants;
 import com.example.mobilewallpaper.util.DialogUtils;
@@ -68,7 +69,12 @@ public class HomeActivity extends BaseActivity implements CategoryAdapter.OnCate
 
     private void setupToolbar() {
         binding.toolbar.setOnMenuItemClickListener(item -> {
-            if (item.getItemId() == R.id.action_favorites) {
+            int id = item.getItemId();
+            if (id == R.id.action_live_wallpaper) {
+                startActivity(new Intent(this, LiveWallpaperListActivity.class));
+                return true;
+            }
+            if (id == R.id.action_favorites) {
                 startActivity(new Intent(this, FavoriteActivity.class));
                 return true;
             }

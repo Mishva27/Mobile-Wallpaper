@@ -28,6 +28,7 @@ public final class Constants {
     // Intent extras
     public static final String EXTRA_CATEGORY_INDEX = "extra_category_index";
     public static final String EXTRA_WALLPAPER = "extra_wallpaper";
+    public static final String EXTRA_LIVE_WALLPAPER = "extra_live_wallpaper";
 
     // Analytics events
     public static final String EVENT_CATEGORY_OPEN = "category_open";
