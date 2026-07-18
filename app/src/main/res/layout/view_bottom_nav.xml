@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Floating pill-shaped bottom navigation bar. Each tab is a FrameLayout holding a
+    fixed-size ImageView; the ImageView mirrors its parent's selected state
+    (duplicateParentState) so the active-circle background and icon tint switch
+    together when the host toggles setSelected() on the tab.
+-->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomNavCard"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bottom_nav_height"
+    app:cardBackgroundColor="@color/bg_elevated"
+    app:cardCornerRadius="@dimen/bottom_nav_radius"
+    app:cardElevation="@dimen/elevation_card"
+    app:strokeColor="@color/divider"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/space_sm">
+
+        <FrameLayout
+            android:id="@+id/navWallpapers"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/nav_wallpapers">
+
+            <ImageView
+                android:layout_width="@dimen/bottom_nav_item"
+                android:layout_height="@dimen/bottom_nav_item"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_bottom_nav_item"
+                android:duplicateParentState="true"
+                android:padding="@dimen/bottom_nav_icon_padding"
+                android:src="@drawable/ic_wallpaper"
+                android:contentDescription="@string/nav_wallpapers"
+                app:tint="@color/bottom_nav_icon_tint" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/navLive"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/nav_live">
+
+            <ImageView
+                android:layout_width="@dimen/bottom_nav_item"
+                android:layout_height="@dimen/bottom_nav_item"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_bottom_nav_item"
+                android:duplicateParentState="true"
+                android:padding="@dimen/bottom_nav_icon_padding"
+                android:src="@drawable/ic_live"
+                android:contentDescription="@string/nav_live"
+                app:tint="@color/bottom_nav_icon_tint" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/navFavorites"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/nav_favorites">
+
+            <ImageView
+                android:layout_width="@dimen/bottom_nav_item"
+                android:layout_height="@dimen/bottom_nav_item"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_bottom_nav_item"
+                android:duplicateParentState="true"
+                android:padding="@dimen/bottom_nav_icon_padding"
+                android:src="@drawable/ic_favorite"
+                android:contentDescription="@string/nav_favorites"
+                app:tint="@color/bottom_nav_icon_tint" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/navSettings"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/nav_settings">
+
+            <ImageView
+                android:layout_width="@dimen/bottom_nav_item"
+                android:layout_height="@dimen/bottom_nav_item"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_bottom_nav_item"
+                android:duplicateParentState="true"
+                android:padding="@dimen/bottom_nav_icon_padding"
+                android:src="@drawable/ic_settings"
+                android:contentDescription="@string/nav_settings"
+                app:tint="@color/bottom_nav_icon_tint" />
+        </FrameLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
