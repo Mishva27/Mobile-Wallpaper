@@ -64,6 +64,8 @@ public class LiveWallpaperDetailActivity extends BaseActivity
     private File videoFile;
     private int videoWidth;
     private int videoHeight;
+    /** Work to run once the live wallpaper is active — the lock frame for BOTH. */
+    private Runnable pendingAfterLive;
 
     // Pre-Android 10 devices need storage permission to save to the gallery.
     private final ActivityResultLauncher<String> storagePermissionLauncher =
@@ -81,7 +83,11 @@ public class LiveWallpaperDetailActivity extends BaseActivity
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                     result -> {
                         if (isOurLiveWallpaperActive()) {
-                            toast(R.string.msg_wallpaper_set);
+                            onLiveApplied();
+                        } else {
+                            // User backed out of the picker; leave the lock screen alone.
+                            pendingAfterLive = null;
+                            loadingDialog.dismiss();
                         }
                     });
 
@@ -266,15 +272,51 @@ public class LiveWallpaperDetailActivity extends BaseActivity
     }
 
     /**
-     * Hands the clip to {@link VideoLiveWallpaperService} and opens the system
-     * live-wallpaper picker to confirm. Applying the video as a still frame here
-     * would defeat the point — the whole screen is about an animated wallpaper.
-     *
-     * <p>{@code target} cannot be honoured: Android applies a live wallpaper
-     * system-wide and its picker exposes no home/lock choice.</p>
+     * Routes the sheet's choice to the surface that can actually show it. Android
+     * runs a live wallpaper on the home screen only — there is no lock-screen live
+     * wallpaper — so the lock surface gets a still frame from the same clip.
      */
     private void applyFromVideoFile(@NonNull File file, WallpaperSetter.Target target,
                                     WallpaperSetter.Mode mode) {
+        switch (target) {
+            case LOCK:
+                pendingAfterLive = null;
+                applyFrameToLock(file, mode);
+                break;
+            case BOTH:
+                // Frame goes on last: activating the live wallpaper can reset the
+                // lock surface on some ROMs, which would undo it if done first.
+                pendingAfterLive = () -> applyFrameToLock(file, mode);
+                applyLive(file, mode);
+                break;
+            case HOME:
+            default:
+                pendingAfterLive = null;
+                applyLive(file, mode);
+                break;
+        }
+    }
+
+    /** Puts a still frame from the clip on the lock screen. */
+    private void applyFrameToLock(@NonNull File file, WallpaperSetter.Mode mode) {
+        WallpaperSetter.applyFromFile(this, file, WallpaperSetter.Target.LOCK, mode,
+                new WallpaperSetter.Callback() {
+                    @Override
+                    public void onSuccess(@NonNull WallpaperSetter.Target target) {
+                        loadingDialog.dismiss();
+                        toast(R.string.msg_wallpaper_set);
+                    }
+
+                    @Override
+                    public void onError() {
+                        loadingDialog.dismiss();
+                        toast(R.string.error_wallpaper_set);
+                    }
+                });
+    }
+
+    /** Hands the clip to {@link VideoLiveWallpaperService} for the home screen. */
+    private void applyLive(@NonNull File file, WallpaperSetter.Mode mode) {
         // Same rule as WallpaperSetter: a screen-sized canvas leaves the launcher
         // nothing to pan, a wider one lets it scroll the wallpaper between pages.
         DisplayMetrics dm = getResources().getDisplayMetrics();
@@ -298,14 +340,27 @@ public class LiveWallpaperDetailActivity extends BaseActivity
         });
     }
 
-    private void openLivePicker() {
+    /** Runs the follow-up work once the live wallpaper is confirmed active. */
+    private void onLiveApplied() {
+        Runnable next = pendingAfterLive;
+        pendingAfterLive = null;
+        if (next != null) {
+            loadingDialog.show(R.string.progress_applying_wallpaper);
+            next.run();
+            return;
+        }
         loadingDialog.dismiss();
+        toast(R.string.msg_wallpaper_set);
+    }
+
+    private void openLivePicker() {
         if (isOurLiveWallpaperActive()) {
             // Already our engine — it reloads the new clip on its own, so sending the
             // user through the picker again would just be a pointless detour.
-            toast(R.string.msg_wallpaper_set);
+            onLiveApplied();
             return;
         }
+        loadingDialog.dismiss();
         Intent intent = new Intent(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER)
                 .putExtra(WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
                         new ComponentName(this, VideoLiveWallpaperService.class));
